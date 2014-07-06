@@ -1,13 +1,13 @@
 //----------------------------------------------------------------------
-// File: playlistMgr.cpp
-// Purpose: Prototypes of MP3 streamer.
+// File: playlist.cpp
+// Purpose: Prototypes of MP4 streamer.
 
 //----------------------------------------------------------------------
 #ifndef _MP4STREAMER_H_
 #define _MP4STREAMER_H_
 //----------------------------------------------------------------------
-// File: mp3streamer.h
-// Purpose: Prototypes of MP3 streamer.
+// File: mp4streamer.h
+// Purpose: Prototypes of MP4 streamer.
 //----------------------------------------------------------------------
 #include <list>
 #include<iostream>
@@ -93,6 +93,6 @@ int main (void)
 */
 
 //----------------------------------------------------------------------
-// End of <playlistMgr.cpp>
+// End of <playlist.cpp>
 //----------------------------------------------------------------------
 
