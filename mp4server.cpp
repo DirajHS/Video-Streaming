@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------
-// File: mp3server.cpp
-// Purpose: Implementation of mp3server
+// File: mp4server.cpp
+// Purpose: Implementation of mp4server
 //----------------------------------------------------------------------------
 
 #include <iostream>
@@ -35,8 +35,8 @@ namespace std { using namespace __gnu_cxx; }
 #define FALSE 0
 #define MAXLINE 1024
 #define MAXMNTLEN 64
-#define MP3CLIENTPORT 9000
-#define MP3STREAMERPORT 9001
+#define MP4CLIENTPORT 9000
+#define MP4STREAMERPORT 9001
 
 #define SA struct sockaddr
 #include <pthread.h>
@@ -78,8 +78,8 @@ void sigpipeHandler (int a);
 //----------------------------------------------------------------------------
 // Global Variables
 //----------------------------------------------------------------------------
-int listen_client;	// listen for mp3 clients on this socket.
-int listen_streamer;// listen for mp3 streamers on this socket.
+int listen_client;	// listen for mp4 clients on this socket.
+int listen_streamer;// listen for mp4 streamers on this socket.
 
 pthread_mutex_t dbmutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -98,7 +98,7 @@ hash_map<const char*, hash_map<int,int>*, hash<const char*>, eqstr> master_table
 
 int main (int argc, char *argv[])
 {
-	signal (SIGPIPE, sigpipeHandler); // TODO:Find why this is reqd.
+	signal (SIGPIPE, sigpipeHandler);
 
 	// Clear all the hash maps
 	streamers_2_mountpt.clear ();
@@ -117,7 +117,7 @@ int main (int argc, char *argv[])
 	bzero (&servaddr_streamer, sizeof (servaddr_streamer));
 	servaddr_streamer.sin_family = AF_INET;
 	servaddr_streamer.sin_addr.s_addr = htonl (INADDR_ANY);
-	servaddr_streamer.sin_port = htons (MP3STREAMERPORT);
+	servaddr_streamer.sin_port = htons (MP4STREAMERPORT);
 
 	int bind_streamer = bind (listen_streamer, (SA *) &servaddr_streamer, sizeof (servaddr_streamer)); 
 	if (bind_streamer < 0 )
@@ -138,7 +138,7 @@ int main (int argc, char *argv[])
 	bzero (&servaddr_client, sizeof (servaddr_client));
 	servaddr_client.sin_family = AF_INET;
 	servaddr_client.sin_addr.s_addr = htonl (INADDR_ANY);
-	servaddr_client.sin_port = htons (MP3CLIENTPORT);
+	servaddr_client.sin_port = htons (MP4CLIENTPORT);
 	int bind_client = bind (listen_client, (SA *) &servaddr_client, sizeof (servaddr_client)); 
 	if (bind_client < 0 )
 	{
@@ -236,7 +236,7 @@ void accept_connections (void* arg)
 				if (bytes_read < 0)
 				{
 					printf ("Mount point not received from client ...\n");
-					exit (1); //FIXME: remove this exit.
+					exit (1); 
 				} else
 				{
 					//printf ("%s: Mount point received is :", __PRETTY_FUNCTION__, mountpt_from_streamer);
@@ -267,7 +267,7 @@ void accept_connections (void* arg)
 				}	
 				else
 				{
-					char audioBuffer[MAXLINE];
+					char videoBuffer[MAXLINE];
 
 					printf ("Accepted connection from client ...\n");
 
@@ -277,19 +277,20 @@ void accept_connections (void* arg)
 
 					if (addClientSuccess)
 					{
-						strcpy (audioBuffer, "HTTP/1.0 200 OK\n");
-						strcpy (audioBuffer, "Content-Type: video/mp4\n");
+						strcpy (videoBuffer, "HTTP/1.0 200 OK\r\n");
+						strcat (videoBuffer, "Content-Type: video/mp4\r\n");
 					}
 					else
 					{
-						strcpy (audioBuffer, "HTTP/1.0 404 Not Found\n");
+						strcat (videoBuffer, "HTTP/1.0 404 Not Found\r\n");
 					}
+					strcat (videoBuffer, "\r\n");
+
 					// Send the HTTP Acknowledgement
-					if (send (conn_client, audioBuffer, strlen (audioBuffer), 0) < 0)
+					if (send (conn_client, videoBuffer, strlen (videoBuffer), 0) < 0)
 					{
 						perror ("send of HTTP Ack failure");
 					}
-					
 				}
 			} // else of (if (conn_client < 0 ))
 		} // 
@@ -352,14 +353,6 @@ void media_streamer (void* arg)
 				if (recvLen <= 0)
 				{
 					printf ("Read error from streamer...\n");
-					// TODO: 
-					// A streamer has gone off.
-					// 		- Remove the socket from streamers2mp.
-					// 		- Get the listeners for this channel & remove them.
-					// 		- Remove the mountpoint from the masterTable.
-					//
-					// All this should not be done here. Add it to a 
-					// removeStreamers Table and do it outside the for loop.
 					removeStreamerList.push_back (i->first);
 				} else
 				{
@@ -621,5 +614,5 @@ int max2 (int s1, int s2)
 	return (s1 > s2 ? s1 : s2);
 }
 //----------------------------------------------------------------------
-// End of <mp3server.cpp>
+// End of <mp4server.cpp>
 //----------------------------------------------------------------------
