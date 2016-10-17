@@ -25,7 +25,7 @@ The project will work on the standalone systems, LAN connected systems and the r
 * Open a new terminal by pressing `ctrl+alt+f1`, enter the user name and password.
 * Now goto the directory in which all the project files are stored by using `cd` command.
 * Compile the server file   [mp4server.cpp](https://github.com/DirajHS/MP4_Streamer/blob/master/mp4server.cpp) by giving 
-    ```sh 
+    ```
     $ g++ mp4server.cpp -o se -lpthread 
     ```
 	 on the command prompt.
