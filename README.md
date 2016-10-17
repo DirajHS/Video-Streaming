@@ -30,7 +30,7 @@ The project will work on the standalone systems, LAN connected systems and the r
     ```
 	 on the command prompt.
 * Execute the compiled file by giving 
-    ```sh
+    ```
     $ ./se
     ```
     at the command prompt and shift to other terminal.	
@@ -38,11 +38,11 @@ The project will work on the standalone systems, LAN connected systems and the r
 *Streamer*
 * Once the server is running shift to other terminal by pressing ctrl+alt+f2, goto to the dir in which all the project files are stored by using `cd` command.
 * Compile the [mp4streamer.cpp](https://github.com/DirajHS/MP4_Streamer/blob/master/mp4streamer.cpp) file by giving 
-    ```sh
+    ```
     $ g++ mp4streamer.cpp playlist.cpp -o st
     ```
 * Execute the compiled file by  giving 
-    ```sh
+    ```
         $ ./st <localhost address> 9001 /h pl.txt
     ```
     mp4streamer will start running.
@@ -52,7 +52,7 @@ The project will work on the standalone systems, LAN connected systems and the r
 ### CLIENT PART
 * Open a new terminal and type the IP address of server with port number and mount to play the video. 
 * You can use any vidoe player like VLC or MX player.
-    ```sh
+    ```
     $ vlc http://192.168.0.100:9000/h
     ```
 
