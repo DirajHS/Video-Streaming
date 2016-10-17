@@ -1,5 +1,7 @@
 # MP4 Streamer
 
+[![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?maxAge=2592000)]()
+
 ## H264 Video Streaming using UNIX Networking 
 
 This project MP4-streaming is mainly concerned about brodcasting MP4 videos over the net, mobile phones. In this project I replicate the above process by using a client and a server machines. The client sends it's request for viewing MP4. The server in turn streams the MP4 videos to the client, if the connection is established. The important  thing here is that no MP4s are copied as  whole while sending from server to client. The MP4 videos are stored in MPEG Transport format which is standard for transmission and storage of audio, video and Program and System Information Protocol. Transport stream specifies a container format encapsulating packetized elementary streams, with error correction and stream synchronization features for maintaining transmission integrity when the signal is degraded.
