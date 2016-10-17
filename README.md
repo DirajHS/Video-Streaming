@@ -7,11 +7,17 @@
 This project MP4-streaming is mainly concerned about brodcasting MP4 videos over the net, mobile phones. In this project I replicate the above process by using a client and a server machines. The client sends it's request for viewing MP4. The server in turn streams the MP4 videos to the client, if the connection is established. The important  thing here is that no MP4s are copied as  whole while sending from server to client. The MP4 videos are stored in MPEG Transport format which is standard for transmission and storage of audio, video and Program and System Information Protocol. Transport stream specifies a container format encapsulating packetized elementary streams, with error correction and stream synchronization features for maintaining transmission integrity when the signal is degraded.
 </p>
 
+<p align="justify">
 Transport streams differ from the similarly named program streams in several important ways: program streams are designed for reasonably reliable media, such as discs (like DVDs), while transport streams are designed for less reliable transmission, namely terrestrial or satellite broadcast. Further, a transport stream may carry multiple programs.
+</p>
 
+<p align="justify">
 The Network project  is done basically to work on the UNIX Platform by using the client server technology. The source code is written in C++ Language.
+</p>
 
+<p align="justify">
 The project will work on the standalone systems, LAN connected systems and the remote machine connected to the internet. However the user will not be able to listen the videos of his/her choice. Only the videos streamed by the streamer will be viewed (like TV programs are streamed).
+</p>
 
 ## Basic Requirements:
 * Your computer is running on Linux with Multimedia Utilities (vlc or ffplay installed).
