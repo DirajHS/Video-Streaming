@@ -1,0 +1,4 @@
+language: cpp
+script:
+  - g++ mp4server.cpp -o se -lpthread 
+  - g++ mp4streamer.cpp playlist.cpp -o st
