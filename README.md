@@ -1,6 +1,7 @@
 # Video Streaming
 
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?maxAge=2592000)]()
+[![https://github.com/DirajHS/Video-Streaming](https://travis-ci.org/DirajHS/Video-Streaming.svg?branch=master)]()
 
 ## H264 Video Streaming using UNIX Networking 
 <p align="justify">
